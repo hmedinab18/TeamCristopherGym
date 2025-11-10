@@ -3,42 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitTracker - Tu Espacio</title>
+    <!-- Actualizado el título de la pestaña -->
+    <title>Team Cristopher Gym - Tu Espacio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Usamos 'Nunito' para un toque más amigable y redondeado -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: 'Nunito', sans-serif; @apply bg-orange-50/50 text-gray-700; }
         .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Friendly Theme Colors */
-        .primary-color { @apply bg-orange-500; }
-        .primary-color-hover { @apply hover:bg-orange-600; }
-        .text-primary { @apply text-orange-600; }
-        .border-primary { @apply border-orange-500; }
-        .bg-soft { @apply bg-white; }
-        .border-soft { @apply border-orange-100; }
-
         .login-modal { background-color: rgba(255, 247, 237, 0.9); backdrop-filter: blur(5px); }
         .dashboard-card { @apply bg-white p-6 rounded-2xl shadow-sm border border-orange-100 hover:shadow-md transition-shadow; }
-
-        /* Friendly Button Tabs Styles */
         .admin-tab-btn { @apply px-5 py-3 text-sm font-bold text-gray-500 bg-white border-2 border-orange-50 rounded-xl hover:bg-orange-50 hover:text-orange-600 transition-all flex items-center justify-center; }
         .active-tab-btn { @apply bg-orange-100 text-orange-700 border-orange-200 shadow-sm; }
-
-        /* Friendly Calendar styles */
         .calendar-day { @apply w-10 h-10 flex items-center justify-center rounded-full text-sm cursor-default transition-all font-semibold; }
         .calendar-day.attended { @apply bg-green-400 text-white shadow-sm; }
         .calendar-day.today { @apply border-2 border-orange-400 text-orange-600; }
         .calendar-day.inactive { @apply text-gray-300; }
-
-        /* Friendly Table styles */
         .smart-table th, .smart-table td { @apply px-5 py-4 text-sm border-b border-orange-50; }
         .smart-table th { @apply text-left font-bold text-orange-800/70 bg-orange-50/50 first:rounded-tl-xl last:rounded-tr-xl; }
         .smart-table tbody tr:hover { @apply bg-orange-50/30; }
         .smart-table td { @apply text-gray-600 font-medium; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { @apply bg-transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-orange-200/50 rounded-full hover:bg-orange-300/70 border-2 border-white; }
     </style>
 </head>
 <body class="min-h-screen antialiased selection:bg-orange-200 selection:text-orange-900">
@@ -54,18 +42,10 @@
                 <p class="text-gray-500 text-sm mt-2">Ingresa tus credenciales para continuar.</p>
             </div>
             <form id="loginForm" class="space-y-5">
-                <div>
-                    <input type="text" id="adminUser" placeholder="Usuario" class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl focus:ring-2 focus:ring-orange-200 focus:border-orange-300 outline-none transition-all text-gray-700 font-semibold placeholder:text-gray-400" required>
-                </div>
-                <div>
-                    <input type="password" id="adminPass" placeholder="Contraseña" class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl focus:ring-2 focus:ring-orange-200 focus:border-orange-300 outline-none transition-all text-gray-700 font-semibold placeholder:text-gray-400" required>
-                </div>
-                <button type="submit" class="w-full bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white py-4 rounded-xl font-bold text-lg shadow-md transition-all active:scale-95">
-                    Entrar al Panel
-                </button>
-                <button type="button" id="closeLoginBtn" class="w-full text-gray-500 py-3 text-sm hover:text-orange-500 font-semibold transition-colors">
-                    Volver atrás
-                </button>
+                <div><input type="text" id="adminUser" placeholder="Usuario" class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl focus:ring-2 focus:ring-orange-200 focus:border-orange-300 outline-none transition-all text-gray-700 font-semibold placeholder:text-gray-400" required></div>
+                <div><input type="password" id="adminPass" placeholder="Contraseña" class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl focus:ring-2 focus:ring-orange-200 focus:border-orange-300 outline-none transition-all text-gray-700 font-semibold placeholder:text-gray-400" required></div>
+                <button type="submit" class="w-full bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white py-4 rounded-xl font-bold text-lg shadow-md transition-all active:scale-95">Entrar al Panel</button>
+                <button type="button" id="closeLoginBtn" class="w-full text-gray-500 py-3 text-sm hover:text-orange-500 font-semibold transition-colors">Volver atrás</button>
             </form>
         </div>
     </div>
@@ -74,12 +54,7 @@
     <div id="calendarModal" class="fixed inset-0 flex items-center justify-center z-50 hidden login-modal fade-in">
         <div class="bg-white p-8 rounded-[2rem] shadow-2xl max-w-md w-full mx-4 border-4 border-orange-50">
             <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h3 class="text-xl font-extrabold text-gray-800 flex items-center gap-2">
-                        <span>📅</span> <span id="calendarTitle">Tu Asistencia</span>
-                    </h3>
-                    <p class="text-sm text-gray-500 font-medium mt-1">¡Mira tu progreso!</p>
-                </div>
+                <div><h3 class="text-xl font-extrabold text-gray-800 flex items-center gap-2"><span>📅</span> <span id="calendarTitle">Tu Asistencia</span></h3><p class="text-sm text-gray-500 font-medium mt-1">¡Mira tu progreso!</p></div>
                 <button onclick="closeCalendar()" class="bg-gray-100 hover:bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full text-gray-500 transition-colors font-bold text-xl">✕</button>
             </div>
             <div class="flex justify-between items-center mb-6 bg-orange-50 p-2 rounded-2xl">
@@ -87,48 +62,31 @@
                 <span id="currentMonthYear" class="font-bold text-orange-800 text-lg capitalize"></span>
                 <button onclick="changeMonth(1)" class="p-3 hover:bg-white rounded-xl text-orange-500 transition-all shadow-sm">▶</button>
             </div>
-            <div class="grid grid-cols-7 gap-2 text-center mb-2 text-xs font-extrabold text-orange-400 uppercase tracking-wider">
-                <div>Do</div><div>Lu</div><div>Ma</div><div>Mi</div><div>Ju</div><div>Vi</div><div>Sa</div>
-            </div>
+            <div class="grid grid-cols-7 gap-2 text-center mb-2 text-xs font-extrabold text-orange-400 uppercase tracking-wider"><div>Do</div><div>Lu</div><div>Ma</div><div>Mi</div><div>Ju</div><div>Vi</div><div>Sa</div></div>
             <div id="calendarGrid" class="grid grid-cols-7 gap-2 justify-items-center"></div>
         </div>
     </div>
 
     <nav class="bg-white/80 backdrop-blur-md border-b border-orange-100 sticky top-0 z-30">
         <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+            <!-- Actualizado el nombre del gimnasio -->
             <h1 class="text-2xl font-extrabold flex items-center text-gray-800 tracking-tight">
                 <span class="text-3xl mr-2">🍊</span>
-                Fit<span class="text-orange-500">Tracker</span>
+                Team Cristopher <span class="text-orange-500 ml-1">Gym</span>
             </h1>
-            <button id="adminToggleBtn" class="text-sm font-bold flex items-center px-5 py-2.5 rounded-full transition-all bg-orange-50 text-orange-600 hover:bg-orange-100 border-2 border-orange-100 shadow-sm">
-                <span class="mr-2">🔒</span>
-                Admin
-            </button>
+            <button id="adminToggleBtn" class="text-sm font-bold flex items-center px-5 py-2.5 rounded-full transition-all bg-orange-50 text-orange-600 hover:bg-orange-100 border-2 border-orange-100 shadow-sm"><span class="mr-2">🔒</span> Admin</button>
         </div>
     </nav>
 
     <main class="container mx-auto p-4 md:p-8">
-
         <!-- PUBLIC VIEW -->
         <section id="publicView" class="max-w-md mx-auto mt-16 md:mt-24">
             <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border-2 border-orange-50 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-orange-400 to-pink-500"></div>
-                <div class="text-center mb-10">
-                    <h2 class="text-3xl font-extrabold text-gray-800">¡Vamos a entrenar! 💪</h2>
-                    <p class="text-gray-500 mt-3 text-lg font-medium">Ingresa tu DNI para registrar tu llegada.</p>
-                </div>
+                <div class="text-center mb-10"><h2 class="text-3xl font-extrabold text-gray-800">¡Vamos a entrenar! 💪</h2><p class="text-gray-500 mt-3 text-lg font-medium">Ingresa tu DNI para registrar tu llegada.</p></div>
                 <div class="space-y-6">
-                    <div class="relative">
-                         <span class="absolute left-5 top-1/2 transform -translate-y-1/2 text-2xl opacity-30">🆔</span>
-                        <input type="text" id="dniInput" maxlength="15" placeholder="Tu DNI aquí..." 
-                            class="w-full text-center text-2xl font-bold tracking-widest p-5 pl-12 bg-orange-50/50 border-2 border-orange-100 rounded-2xl focus:border-orange-400 focus:bg-white outline-none transition-all text-gray-800 placeholder:text-gray-300/70"
-                            onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                    </div>
-                    
-                    <button id="markBtn" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white p-5 rounded-2xl font-extrabold text-xl transition-all shadow-lg shadow-green-200/50 flex justify-center items-center active:scale-98">
-                        <span>✨ ¡Listo, llegué!</span>
-                        <div id="btnSpinner" class="hidden ml-3 w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    </button>
+                    <div class="relative"><span class="absolute left-5 top-1/2 transform -translate-y-1/2 text-2xl opacity-30">🆔</span><input type="text" id="dniInput" maxlength="15" placeholder="Tu DNI aquí..." class="w-full text-center text-2xl font-bold tracking-widest p-5 pl-12 bg-orange-50/50 border-2 border-orange-100 rounded-2xl focus:border-orange-400 focus:bg-white outline-none transition-all text-gray-800 placeholder:text-gray-300/70" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></div>
+                    <button id="markBtn" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white p-5 rounded-2xl font-extrabold text-xl transition-all shadow-lg shadow-green-200/50 flex justify-center items-center active:scale-98"><span>✨ ¡Listo, llegué!</span><div id="btnSpinner" class="hidden ml-3 w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div></button>
                 </div>
                 <div id="feedbackMsg" class="hidden mt-8 p-5 rounded-2xl text-center font-bold text-lg fade-in border-2"></div>
             </div>
@@ -137,169 +95,49 @@
         <!-- ADMIN VIEW -->
         <section id="adminView" class="hidden fade-in flex flex-col h-[calc(100vh-120px)]">
             <div class="bg-white rounded-[2rem] shadow-sm border-2 border-orange-50 overflow-hidden flex flex-col flex-grow">
-                
-                <!-- Button Navigation Bar -->
                 <div class="p-4 md:p-6 bg-orange-50/50 border-b-2 border-orange-50 flex flex-wrap gap-3 items-center sticky top-0 z-20 backdrop-blur-md">
-                    <button class="admin-tab-btn active-tab-btn" data-target="dashboardTab">📊 Resumen</button>
-                    <button class="admin-tab-btn" data-target="mainTab">👥 Clientes</button>
-                    <button class="admin-tab-btn" data-target="bodegaTab">🛒 Ventas</button>
-                    <button class="admin-tab-btn" data-target="expensesTab">💸 Gastos</button>
-                    <button class="admin-tab-btn" data-target="freeTab">🧘 Libres</button>
-                    <div class="flex-grow min-w-[20px]"></div>
-                    <button class="admin-tab-btn text-white bg-gradient-to-r from-blue-400 to-indigo-500 border-0 hover:from-blue-500 hover:to-indigo-600 shadow-md ml-auto" data-target="newClientTab">
-                        ➕ Nuevo Cliente
-                    </button>
+                    <button class="admin-tab-btn active-tab-btn" data-target="dashboardTab">📊 Resumen</button><button class="admin-tab-btn" data-target="mainTab">👥 Clientes</button><button class="admin-tab-btn" data-target="bodegaTab">🛒 Ventas</button><button class="admin-tab-btn" data-target="expensesTab">💸 Gastos</button><button class="admin-tab-btn" data-target="freeTab">🧘 Libres</button>
+                    <div class="flex-grow min-w-[20px]"></div><button class="admin-tab-btn text-white bg-gradient-to-r from-blue-400 to-indigo-500 border-0 hover:from-blue-500 hover:to-indigo-600 shadow-md ml-auto" data-target="newClientTab">➕ Nuevo Cliente</button>
                 </div>
-
                 <div class="flex-grow overflow-y-auto relative bg-white p-6 md:p-8 custom-scrollbar">
-                    
                     <!-- TAB 0: DASHBOARD -->
                     <div id="dashboardTab" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                        <!-- KPI Cards -->
-                        <div class="dashboard-card bg-gradient-to-br from-orange-50 to-white border-orange-200">
-                            <h4 class="text-orange-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">💰 Ingresos (Mes)</h4>
-                            <p class="text-4xl font-black text-orange-500" id="kpiIncome">S/ 0.00</p>
-                            <div class="text-sm text-gray-500 mt-4 flex justify-between pt-3 border-t border-orange-100 font-semibold">
-                                <span>Membresías: <b id="kpiMem" class="text-orange-700">S/0</b></span>
-                                <span>Ventas: <b id="kpiBodega" class="text-orange-700">S/0</b></span>
-                            </div>
-                        </div>
-                        <div class="dashboard-card bg-gradient-to-br from-red-50 to-white border-red-100">
-                            <h4 class="text-red-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">💸 Gastos (Mes)</h4>
-                            <p class="text-4xl font-black text-red-400" id="kpiExpenses">S/ 0.00</p>
-                            <div class="text-sm text-gray-500 mt-4 pt-3 border-t border-red-100 font-semibold">
-                                Balance Neto: <b id="kpiBalance" class="text-gray-800 ml-1 px-2 py-0.5 bg-gray-100 rounded-md">S/ 0.00</b>
-                            </div>
-                        </div>
-                        <div class="dashboard-card bg-gradient-to-br from-green-50 to-white border-green-100">
-                            <h4 class="text-green-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">🏃‍♂️ Asistencia Hoy</h4>
-                            <p class="text-4xl font-black text-green-500" id="kpiAttendanceToday">0</p>
-                            <div class="text-sm text-gray-500 mt-4 pt-3 border-t border-green-100 font-semibold">
-                                Activos: <b id="kpiActiveClients" class="text-green-700 ml-1">0</b>
-                            </div>
-                        </div>
-                        <div class="dashboard-card bg-gradient-to-br from-yellow-50 to-white border-yellow-200">
-                            <h4 class="text-yellow-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">⚠️ Por Vencer (7d)</h4>
-                            <p class="text-4xl font-black text-yellow-500" id="kpiExpiringSoon">0</p>
-                            <div class="text-sm text-yellow-700/70 mt-4 pt-3 border-t border-yellow-100 font-semibold">
-                                ¡Avísales pronto!
-                            </div>
-                        </div>
-
-                        <!-- Charts & Lists Row -->
-                        <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-white p-8 rounded-[2rem] shadow-sm border-2 border-orange-50 h-96">
-                             <h4 class="font-bold text-gray-700 mb-6 text-lg flex items-center">📈 Tendencia de la Semana</h4>
-                             <canvas id="attendanceChart"></canvas>
-                        </div>
-                         <div class="col-span-1 bg-orange-50/50 rounded-[2rem] p-6 border-2 border-orange-100 overflow-y-auto h-96 custom-scrollbar">
-                            <h4 class="font-bold text-orange-800 mb-4 sticky top-0 bg-orange-50/50 backdrop-blur-md pb-2 text-lg flex items-center gap-2">
-                                <span>🔔 Alertas</span>
-                            </h4>
-                            <ul id="expiringList" class="space-y-3 text-sm"></ul>
-                        </div>
+                        <div class="dashboard-card bg-gradient-to-br from-orange-50 to-white border-orange-200"><h4 class="text-orange-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">💰 Ingresos (Mes)</h4><p class="text-4xl font-black text-orange-500" id="kpiIncome">S/ 0.00</p><div class="text-sm text-gray-500 mt-4 flex justify-between pt-3 border-t border-orange-100 font-semibold"><span>Membresías: <b id="kpiMem" class="text-orange-700">S/0</b></span><span>Ventas: <b id="kpiBodega" class="text-orange-700">S/0</b></span></div></div>
+                        <div class="dashboard-card bg-gradient-to-br from-red-50 to-white border-red-100"><h4 class="text-red-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">💸 Gastos (Mes)</h4><p class="text-4xl font-black text-red-400" id="kpiExpenses">S/ 0.00</p><div class="text-sm text-gray-500 mt-4 pt-3 border-t border-red-100 font-semibold">Balance Neto: <b id="kpiBalance" class="text-gray-800 ml-1 px-2 py-0.5 bg-gray-100 rounded-md">S/ 0.00</b></div></div>
+                        <div class="dashboard-card bg-gradient-to-br from-green-50 to-white border-green-100"><h4 class="text-green-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">🏃‍♂️ Asistencia Hoy</h4><p class="text-4xl font-black text-green-500" id="kpiAttendanceToday">0</p><div class="text-sm text-gray-500 mt-4 pt-3 border-t border-green-100 font-semibold">Activos: <b id="kpiActiveClients" class="text-green-700 ml-1">0</b></div></div>
+                        <div class="dashboard-card bg-gradient-to-br from-yellow-50 to-white border-yellow-200"><h4 class="text-yellow-800/70 text-sm font-extrabold mb-3 uppercase tracking-wider flex items-center">⚠️ Por Vencer (7d)</h4><p class="text-4xl font-black text-yellow-500" id="kpiExpiringSoon">0</p><div class="text-sm text-yellow-700/70 mt-4 pt-3 border-t border-yellow-100 font-semibold">¡Avísales pronto!</div></div>
+                        <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-white p-8 rounded-[2rem] shadow-sm border-2 border-orange-50 h-96"><h4 class="font-bold text-gray-700 mb-6 text-lg flex items-center">📈 Tendencia de la Semana</h4><canvas id="attendanceChart"></canvas></div>
+                        <div class="col-span-1 bg-orange-50/50 rounded-[2rem] p-6 border-2 border-orange-100 overflow-y-auto h-96 custom-scrollbar"><h4 class="font-bold text-orange-800 mb-4 sticky top-0 bg-orange-50/50 backdrop-blur-md pb-2 text-lg flex items-center gap-2"><span>🔔 Alertas</span></h4><ul id="expiringList" class="space-y-3 text-sm"></ul></div>
                     </div>
-
                     <!-- TAB 1: CLIENTS -->
                     <div id="mainTab" class="tab-content hidden h-full flex flex-col">
                         <div class="bg-orange-50/30 p-5 rounded-t-3xl border-2 border-orange-50 border-b-0 flex flex-wrap gap-4 items-center justify-between sticky top-0 z-10 backdrop-blur-md">
-                            <div class="relative flex-grow max-w-md">
-                                <span class="absolute left-4 top-3.5 text-orange-300 text-lg">🔍</span>
-                                <input type="text" id="searchClient" placeholder="¿A quién buscas?" class="w-full pl-12 pr-5 py-3 bg-white border-2 border-orange-100 rounded-2xl focus:border-orange-300 outline-none text-gray-700 placeholder:text-orange-200 font-semibold transition-all shadow-sm">
-                            </div>
-                            <button id="loadInitialDataBtn" class="hidden bg-blue-50 text-blue-600 px-5 py-3 rounded-xl text-sm font-bold hover:bg-blue-100 border-2 border-blue-100 transition-all flex items-center shadow-sm">
-                                📂 Cargar Demo
-                            </button>
+                            <div class="relative flex-grow max-w-md"><span class="absolute left-4 top-3.5 text-orange-300 text-lg">🔍</span><input type="text" id="searchClient" placeholder="¿A quién buscas?" class="w-full pl-12 pr-5 py-3 bg-white border-2 border-orange-100 rounded-2xl focus:border-orange-300 outline-none text-gray-700 placeholder:text-orange-200 font-semibold transition-all shadow-sm"></div>
+                            <button id="loadInitialDataBtn" class="hidden bg-blue-50 text-blue-600 px-5 py-3 rounded-xl text-sm font-bold hover:bg-blue-100 border-2 border-blue-100 transition-all flex items-center shadow-sm">📂 Cargar Demo</button>
                         </div>
                         <div class="flex-grow overflow-auto border-2 border-orange-50 rounded-b-3xl bg-white custom-scrollbar shadow-sm">
-                            <table class="w-full text-sm smart-table">
-                                <thead class="sticky top-0 z-10 shadow-sm">
-                                    <tr>
-                                        <th class="w-16 text-center">#</th>
-                                        <th>Cliente</th>
-                                        <th class="text-center">DNI</th>
-                                        <th class="text-center bg-orange-100/50 text-orange-800">Uso</th>
-                                        <th class="text-center">Plan</th>
-                                        <th class="text-right">Pago</th>
-                                        <th class="text-center">Inicio</th>
-                                        <th class="text-center">Fin</th>
-                                        <th class="text-center w-32">Acciones</th>
-                                        <th class="w-16"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="mainTableBody" class="divide-y divide-orange-50"></tbody>
-                            </table>
+                            <table class="w-full text-sm smart-table"><thead class="sticky top-0 z-10 shadow-sm"><tr><th class="w-16 text-center">#</th><th>Cliente</th><th class="text-center">DNI</th><th class="text-center bg-orange-100/50 text-orange-800">Uso</th><th class="text-center">Plan</th><th class="text-right">Pago</th><th class="text-center">Inicio</th><th class="text-center">Fin</th><th class="text-center w-32">Acciones</th><th class="w-16"></th></tr></thead><tbody id="mainTableBody" class="divide-y divide-orange-50"></tbody></table>
                         </div>
                     </div>
-
-                    <!-- TAB 2: BODEGA (Sales) -->
+                    <!-- TAB 2: BODEGA -->
                     <div id="bodegaTab" class="tab-content hidden h-full flex flex-col md:flex-row gap-8">
-                         <div class="w-full md:w-1/3 bg-white rounded-[2rem] border-2 border-orange-50 p-8 h-fit sticky top-0 shadow-sm">
-                            <h3 class="font-extrabold text-gray-800 mb-8 text-xl flex items-center gap-2">🛒 Nueva Venta</h3>
-                            <form id="bodegaForm" class="space-y-6">
-                                <div><label class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 block ml-1">Fecha</label><input type="date" name="date" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl text-gray-700 font-semibold focus:border-orange-300 outline-none transition-all"></div>
-                                <div><label class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 block ml-1">¿Qué se lleva?</label><input type="text" name="item" placeholder="Ej. Botella de agua" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl text-gray-700 font-semibold focus:border-orange-300 outline-none transition-all placeholder:text-orange-200"></div>
-                                <div><label class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 block ml-1">Monto (S/)</label><input type="number" step="0.1" name="amount" placeholder="0.00" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl text-gray-700 font-bold text-lg focus:border-orange-300 outline-none transition-all placeholder:text-orange-200"></div>
-                                <button type="submit" class="w-full bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white py-4 rounded-xl font-extrabold mt-6 transition-all shadow-md active:scale-95">¡Vendido! ✨</button>
-                            </form>
-                         </div>
-                         <div class="flex-grow bg-white rounded-[2rem] border-2 border-orange-50 overflow-hidden flex flex-col shadow-sm">
-                             <div class="bg-orange-50/50 p-6 border-b-2 border-orange-50 font-bold text-gray-700 flex justify-between items-center">
-                                 <span class="text-lg">📜 Historial de Ventas</span>
-                                 <span class="bg-green-100 text-green-700 px-4 py-2 rounded-xl text-sm font-extrabold shadow-sm border border-green-200">Total Mes: <b id="totalBodegaMonth" class="ml-1 text-lg">S/0.00</b></span>
-                             </div>
-                             <div class="overflow-auto flex-grow custom-scrollbar p-2">
-                                 <table class="w-full text-sm smart-table"><thead><tr><th>Fecha</th><th>Descripción</th><th class="text-right">Monto</th><th></th></tr></thead><tbody id="bodegaTableBody"></tbody></table>
-                             </div>
-                         </div>
+                        <div class="w-full md:w-1/3 bg-white rounded-[2rem] border-2 border-orange-50 p-8 h-fit sticky top-0 shadow-sm"><h3 class="font-extrabold text-gray-800 mb-8 text-xl flex items-center gap-2">🛒 Nueva Venta</h3><form id="bodegaForm" class="space-y-6"><div><label class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 block ml-1">Fecha</label><input type="date" name="date" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl text-gray-700 font-semibold focus:border-orange-300 outline-none transition-all"></div><div><label class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 block ml-1">¿Qué se lleva?</label><input type="text" name="item" placeholder="Ej. Botella de agua" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl text-gray-700 font-semibold focus:border-orange-300 outline-none transition-all placeholder:text-orange-200"></div><div><label class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 block ml-1">Monto (S/)</label><input type="number" step="0.1" name="amount" placeholder="0.00" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-xl text-gray-700 font-bold text-lg focus:border-orange-300 outline-none transition-all placeholder:text-orange-200"></div><button type="submit" class="w-full bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white py-4 rounded-xl font-extrabold mt-6 transition-all shadow-md active:scale-95">¡Vendido! ✨</button></form></div>
+                        <div class="flex-grow bg-white rounded-[2rem] border-2 border-orange-50 overflow-hidden flex flex-col shadow-sm"><div class="bg-orange-50/50 p-6 border-b-2 border-orange-50 font-bold text-gray-700 flex justify-between items-center"><span class="text-lg">📜 Historial de Ventas</span><span class="bg-green-100 text-green-700 px-4 py-2 rounded-xl text-sm font-extrabold shadow-sm border border-green-200">Total Mes: <b id="totalBodegaMonth" class="ml-1 text-lg">S/0.00</b></span></div><div class="overflow-auto flex-grow custom-scrollbar p-2"><table class="w-full text-sm smart-table"><thead><tr><th>Fecha</th><th>Descripción</th><th class="text-right">Monto</th><th></th></tr></thead><tbody id="bodegaTableBody"></tbody></table></div></div>
                     </div>
-
                     <!-- TAB 3: EXPENSES -->
                     <div id="expensesTab" class="tab-content hidden h-full flex flex-col md:flex-row gap-8">
-                        <div class="w-full md:w-1/3 bg-white rounded-[2rem] border-2 border-red-50 p-8 h-fit sticky top-0 shadow-sm">
-                           <h3 class="font-extrabold text-red-700 mb-8 text-xl flex items-center gap-2">💸 Registrar Gasto</h3>
-                           <form id="expensesForm" class="space-y-6">
-                               <div><label class="text-xs font-bold text-red-300 uppercase tracking-wider mb-2 block ml-1">Fecha</label><input type="date" name="date" required class="w-full p-4 bg-red-50/30 border-2 border-red-100 rounded-xl text-gray-700 font-semibold focus:border-red-300 outline-none transition-all"></div>
-                               <div><label class="text-xs font-bold text-red-300 uppercase tracking-wider mb-2 block ml-1">Concepto</label><input type="text" name="description" placeholder="Ej. Pago de luz" required class="w-full p-4 bg-red-50/30 border-2 border-red-100 rounded-xl text-gray-700 font-semibold focus:border-red-300 outline-none transition-all placeholder:text-red-200"></div>
-                               <div><label class="text-xs font-bold text-red-300 uppercase tracking-wider mb-2 block ml-1">Monto (S/)</label><input type="number" step="0.1" name="amount" placeholder="0.00" required class="w-full p-4 bg-red-50/30 border-2 border-red-100 rounded-xl text-gray-700 font-bold text-lg focus:border-red-300 outline-none transition-all placeholder:text-red-200"></div>
-                               <button type="submit" class="w-full bg-red-400 hover:bg-red-500 text-white py-4 rounded-xl font-extrabold mt-6 transition-all shadow-md active:scale-95">Registrar Salida</button>
-                           </form>
-                        </div>
-                        <div class="flex-grow bg-white rounded-[2rem] border-2 border-red-50 overflow-hidden flex flex-col shadow-sm">
-                            <div class="bg-red-50/50 p-6 border-b-2 border-red-50 font-bold text-gray-700 flex justify-between items-center">
-                                <span class="text-lg">📉 Historial de Gastos</span>
-                                <span class="bg-red-100 text-red-700 px-4 py-2 rounded-xl text-sm font-extrabold shadow-sm border border-red-200">Total Mes: <b id="totalExpensesMonth" class="ml-1 text-lg">S/0.00</b></span>
-                            </div>
-                            <div class="overflow-auto flex-grow custom-scrollbar p-2">
-                                <table class="w-full text-sm smart-table"><thead><tr><th>Fecha</th><th>Descripción</th><th class="text-right">Monto</th><th></th></tr></thead><tbody id="expensesTableBody"></tbody></table>
-                            </div>
-                        </div>
-                   </div>
-
+                        <div class="w-full md:w-1/3 bg-white rounded-[2rem] border-2 border-red-50 p-8 h-fit sticky top-0 shadow-sm"><h3 class="font-extrabold text-red-700 mb-8 text-xl flex items-center gap-2">💸 Registrar Gasto</h3><form id="expensesForm" class="space-y-6"><div><label class="text-xs font-bold text-red-300 uppercase tracking-wider mb-2 block ml-1">Fecha</label><input type="date" name="date" required class="w-full p-4 bg-red-50/30 border-2 border-red-100 rounded-xl text-gray-700 font-semibold focus:border-red-300 outline-none transition-all"></div><div><label class="text-xs font-bold text-red-300 uppercase tracking-wider mb-2 block ml-1">Concepto</label><input type="text" name="description" placeholder="Ej. Pago de luz" required class="w-full p-4 bg-red-50/30 border-2 border-red-100 rounded-xl text-gray-700 font-semibold focus:border-red-300 outline-none transition-all placeholder:text-red-200"></div><div><label class="text-xs font-bold text-red-300 uppercase tracking-wider mb-2 block ml-1">Monto (S/)</label><input type="number" step="0.1" name="amount" placeholder="0.00" required class="w-full p-4 bg-red-50/30 border-2 border-red-100 rounded-xl text-gray-700 font-bold text-lg focus:border-red-300 outline-none transition-all placeholder:text-red-200"></div><button type="submit" class="w-full bg-red-400 hover:bg-red-500 text-white py-4 rounded-xl font-extrabold mt-6 transition-all shadow-md active:scale-95">Registrar Salida</button></form></div>
+                        <div class="flex-grow bg-white rounded-[2rem] border-2 border-red-50 overflow-hidden flex flex-col shadow-sm"><div class="bg-red-50/50 p-6 border-b-2 border-red-50 font-bold text-gray-700 flex justify-between items-center"><span class="text-lg">📉 Historial de Gastos</span><span class="bg-red-100 text-red-700 px-4 py-2 rounded-xl text-sm font-extrabold shadow-sm border border-red-200">Total Mes: <b id="totalExpensesMonth" class="ml-1 text-lg">S/0.00</b></span></div><div class="overflow-auto flex-grow custom-scrollbar p-2"><table class="w-full text-sm smart-table"><thead><tr><th>Fecha</th><th>Descripción</th><th class="text-right">Monto</th><th></th></tr></thead><tbody id="expensesTableBody"></tbody></table></div></div>
+                    </div>
                     <!-- TAB 4: FREE CLASSES -->
                     <div id="freeTab" class="tab-content hidden h-full flex flex-col md:flex-row gap-8">
-                        <div class="w-full md:w-1/3 bg-white rounded-[2rem] border-2 border-blue-50 p-8 h-fit sticky top-0 shadow-sm">
-                            <h3 class="font-extrabold text-blue-700 mb-8 text-xl flex items-center gap-2">🧘 Clase Libre</h3>
-                            <form id="freeForm" class="space-y-6">
-                                <div><label class="text-xs font-bold text-blue-300 uppercase tracking-wider mb-2 block ml-1">Fecha</label><input type="date" name="date" required class="w-full p-4 bg-blue-50/30 border-2 border-blue-100 rounded-xl text-gray-700 font-semibold focus:border-blue-300 outline-none transition-all"></div>
-                                <div><label class="text-xs font-bold text-blue-300 uppercase tracking-wider mb-2 block ml-1">Alumno</label><input type="text" name="studentName" placeholder="Nombre completo" required class="w-full p-4 bg-blue-50/30 border-2 border-blue-100 rounded-xl text-gray-700 font-semibold focus:border-blue-300 outline-none transition-all placeholder:text-blue-200"></div>
-                                <div><label class="text-xs font-bold text-blue-300 uppercase tracking-wider mb-2 block ml-1">Estado / Monto</label><input type="text" name="amountOrStatus" placeholder="Ej. 20.00 o 'Debe'" required class="w-full p-4 bg-blue-50/30 border-2 border-blue-100 rounded-xl text-gray-700 font-semibold focus:border-blue-300 outline-none transition-all placeholder:text-blue-200"></div>
-                                <button type="submit" class="w-full bg-blue-400 hover:bg-blue-500 text-white py-4 rounded-xl font-extrabold mt-6 transition-all shadow-md active:scale-95">Guardar Clase</button>
-                            </form>
-                         </div>
-                         <div class="flex-grow bg-white rounded-[2rem] border-2 border-blue-50 overflow-hidden flex flex-col shadow-sm">
-                             <div class="bg-blue-50/50 p-6 border-b-2 border-blue-50 font-bold text-gray-700 text-lg">📋 Registro de Clases Libres</div>
-                             <div class="overflow-auto flex-grow custom-scrollbar p-2">
-                                 <table class="w-full text-sm smart-table"><thead><tr><th>Fecha</th><th>Alumno</th><th class="text-right">Estado</th><th></th></tr></thead><tbody id="freeTableBody"></tbody></table>
-                             </div>
-                         </div>
+                        <div class="w-full md:w-1/3 bg-white rounded-[2rem] border-2 border-blue-50 p-8 h-fit sticky top-0 shadow-sm"><h3 class="font-extrabold text-blue-700 mb-8 text-xl flex items-center gap-2">🧘 Clase Libre</h3><form id="freeForm" class="space-y-6"><div><label class="text-xs font-bold text-blue-300 uppercase tracking-wider mb-2 block ml-1">Fecha</label><input type="date" name="date" required class="w-full p-4 bg-blue-50/30 border-2 border-blue-100 rounded-xl text-gray-700 font-semibold focus:border-blue-300 outline-none transition-all"></div><div><label class="text-xs font-bold text-blue-300 uppercase tracking-wider mb-2 block ml-1">Alumno</label><input type="text" name="studentName" placeholder="Nombre completo" required class="w-full p-4 bg-blue-50/30 border-2 border-blue-100 rounded-xl text-gray-700 font-semibold focus:border-blue-300 outline-none transition-all placeholder:text-blue-200"></div><div><label class="text-xs font-bold text-blue-300 uppercase tracking-wider mb-2 block ml-1">Estado / Monto</label><input type="text" name="amountOrStatus" placeholder="Ej. 20.00 o 'Debe'" required class="w-full p-4 bg-blue-50/30 border-2 border-blue-100 rounded-xl text-gray-700 font-semibold focus:border-blue-300 outline-none transition-all placeholder:text-blue-200"></div><button type="submit" class="w-full bg-blue-400 hover:bg-blue-500 text-white py-4 rounded-xl font-extrabold mt-6 transition-all shadow-md active:scale-95">Guardar Clase</button></form></div>
+                        <div class="flex-grow bg-white rounded-[2rem] border-2 border-blue-50 overflow-hidden flex flex-col shadow-sm"><div class="bg-blue-50/50 p-6 border-b-2 border-blue-50 font-bold text-gray-700 text-lg">📋 Registro de Clases Libres</div><div class="overflow-auto flex-grow custom-scrollbar p-2"><table class="w-full text-sm smart-table"><thead><tr><th>Fecha</th><th>Alumno</th><th class="text-right">Estado</th><th></th></tr></thead><tbody id="freeTableBody"></tbody></table></div></div>
                     </div>
-
                     <!-- TAB 5: NEW CLIENT -->
                     <div id="newClientTab" class="tab-content hidden h-full overflow-y-auto custom-scrollbar">
                         <div class="max-w-3xl mx-auto bg-white p-10 md:p-12 rounded-[2.5rem] border-2 border-orange-50 shadow-sm my-6">
-                            <h3 class="text-3xl font-extrabold text-gray-800 mb-10 pb-6 border-b-2 border-orange-50 flex items-center gap-3">
-                                <span class="text-4xl">👋</span> Nuevo Miembro
-                            </h3>
+                            <h3 class="text-3xl font-extrabold text-gray-800 mb-10 pb-6 border-b-2 border-orange-50 flex items-center gap-3"><span class="text-4xl">👋</span> Nuevo Miembro</h3>
                             <form id="clientForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div class="space-y-3"><label class="text-sm font-extrabold text-gray-600 ml-1">DNI <span class="text-orange-400">*</span></label><input type="text" name="dni" maxlength="15" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-2xl text-gray-700 font-bold text-lg focus:border-orange-400 outline-none transition-all placeholder:text-orange-200" placeholder="Documento" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></div>
                                 <div class="space-y-3"><label class="text-sm font-extrabold text-gray-600 ml-1">Nombre Completo <span class="text-orange-400">*</span></label><input type="text" name="fullName" required class="w-full p-4 bg-orange-50/30 border-2 border-orange-100 rounded-2xl text-gray-700 font-bold text-lg focus:border-orange-400 outline-none transition-all placeholder:text-orange-200" placeholder="Ej. María Pérez"></div>
@@ -313,39 +151,53 @@
                                 </div>
                                 <div class="md:col-span-2 flex justify-end gap-5 mt-10 pt-8 border-t-2 border-orange-50">
                                     <button type="reset" class="px-8 py-4 text-gray-500 bg-gray-50 hover:bg-gray-100 rounded-2xl font-bold transition-colors">Limpiar</button>
-                                    <button type="submit" class="px-10 py-4 bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white rounded-2xl font-extrabold transition-all shadow-md hover:shadow-lg active:scale-95">
-                                        ¡Dar la Bienvenida! 🎉
-                                    </button>
+                                    <button type="submit" class="px-10 py-4 bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white rounded-2xl font-extrabold transition-all shadow-md hover:shadow-lg active:scale-95">¡Dar la Bienvenida! 🎉</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
-
     </main>
-
-    <style>
-        /* Friendly Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { @apply bg-transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-orange-200/50 rounded-full hover:bg-orange-300/70 border-2 border-white; }
-    </style>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, doc, setDoc, addDoc, getDoc, onSnapshot, query, where, updateDoc, arrayUnion, deleteDoc, orderBy, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const appId = typeof __app_id!=='undefined'?__app_id:'fit-v3', firebaseConfig = typeof __firebase_config!=='undefined'?JSON.parse(__firebase_config):{}, app = initializeApp(firebaseConfig), auth = getAuth(app), db = getFirestore(app);
+        // =====================================================================================
+        // ZONA DE CONFIGURACIÓN PARA PRODUCCIÓN (VERCEL/GITHUB PAGES)
+        // =====================================================================================
+        // 1. Ve a tu consola de Firebase > Configuración del proyecto > General > Tus apps
+        // 2. Copia el objeto 'firebaseConfig' y reemplázalo aquí abajo.
+        // 3. Define un 'appId' único para tu gimnasio si lo deseas, o usa 'fit-prod-v1'.
+
+        const firebaseConfig = {
+            // --- PEGA AQUÍ TU CONFIGURACIÓN REAL DE FIREBASE ---
+            // apiKey: "AIzaSy...",
+            // authDomain: "tu-proyecto.firebaseapp.com",
+            // projectId: "tu-proyecto",
+            // storageBucket: "tu-proyecto.appspot.com",
+            // messagingSenderId: "123456789",
+            // appId: "1:123456789:web:abcdef123456"
+        };
+        
+        const appId = 'fit-prod-v1'; // Puedes cambiar esto si necesitas separar datos
+
+        // NOTA: Si estás probando en el entorno de Canvas, el código intentará usar
+        // las variables inyectadas automáticamente si la configuración de arriba está vacía.
+        const finalFirebaseConfig = (Object.keys(firebaseConfig).length > 0) ? firebaseConfig : (typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {});
+        const finalAppId = (appId !== 'fit-prod-v1' || Object.keys(firebaseConfig).length > 0) ? appId : (typeof __app_id !== 'undefined' ? __app_id : 'fit-v3-fallback');
+        // =====================================================================================
+
+        const app = initializeApp(finalFirebaseConfig), auth = getAuth(app), db = getFirestore(app);
         let currentUser = null, isAdmin = false, attendanceChart = null, currentCalDate = new Date(), selectedClientLogs = [], selectedClientName = '';
         const ADMIN_USER='LIZ_ZANAB', ADMIN_PASS='933032127';
-        const cols = { clients:()=>collection(db,`artifacts/${appId}/public/data/clients_v2`), bodega:()=>collection(db,`artifacts/${appId}/public/data/bodega_v2`), expenses:()=>collection(db,`artifacts/${appId}/public/data/expenses_v2`), free:()=>collection(db,`artifacts/${appId}/public/data/free_classes_v2`) };
+        const cols = { clients:()=>collection(db,`artifacts/${finalAppId}/public/data/clients_v2`), bodega:()=>collection(db,`artifacts/${finalAppId}/public/data/bodega_v2`), expenses:()=>collection(db,`artifacts/${finalAppId}/public/data/expenses_v2`), free:()=>collection(db,`artifacts/${finalAppId}/public/data/free_classes_v2`) };
 
         onAuthStateChanged(auth, u => { currentUser = u; if(u) setupListeners(); });
-        (async()=>{try{if(typeof __initial_auth_token!=='undefined')await signInWithCustomToken(auth,__initial_auth_token);else await signInAnonymously(auth);}catch(e){console.error(e)}})();
+        (async()=>{ try { if(typeof __initial_auth_token !== 'undefined') await signInWithCustomToken(auth, __initial_auth_token); else await signInAnonymously(auth); } catch(e) { console.error("Auth Error:", e); alert("Error de conexión con la base de datos."); } })();
 
         const els = { loginModal:document.getElementById('loginModal'), calendarModal:document.getElementById('calendarModal'), adminToggle:document.getElementById('adminToggleBtn'), publicView:document.getElementById('publicView'), adminView:document.getElementById('adminView'), loginForm:document.getElementById('loginForm'), tabs:document.querySelectorAll('.admin-tab-btn'), contents:document.querySelectorAll('.tab-content'), loadInitBtn:document.getElementById('loadInitialDataBtn') };
 
@@ -392,23 +244,13 @@
         function updateExpensesTable() { const t=data.expenses.reduce((s,i)=>s+(i.amount||0),0); document.getElementById('totalExpensesMonth').textContent=`S/${t.toFixed(2)}`; document.getElementById('expensesTableBody').innerHTML=data.expenses.map(i=>`<tr class="border-b border-gray-50 hover:bg-gray-50/50"><td>${fmtDate(i.date)}</td><td class="font-semibold text-gray-700">${i.description}</td><td class="text-right font-bold text-red-500">S/${parseFloat(i.amount).toFixed(2)}</td><td class="text-right"><button onclick="del('expenses_v2','${i.id}')" class="text-gray-300 hover:text-red-400 text-sm p-2 transition-colors">Eliminar</button></td></tr>`).join('')||'<tr><td colspan="4" class="p-8 text-center text-gray-400 italic font-medium">¡Genial! No hay gastos registrados 🎉</td></tr>'; }
         function updateFreeTable() { document.getElementById('freeTableBody').innerHTML=data.free.map(i=>`<tr class="border-b border-gray-50 hover:bg-gray-50/50"><td>${fmtDate(i.date)}</td><td class="font-semibold text-gray-700">${i.studentName}</td><td class="text-right font-bold ${isNaN(i.amountOrStatus)?'text-orange-500':'text-blue-600'}">${isNaN(i.amountOrStatus)?i.amountOrStatus:'S/'+parseFloat(i.amountOrStatus).toFixed(2)}</td><td class="text-right"><button onclick="del('free_classes_v2','${i.id}')" class="text-gray-300 hover:text-red-400 text-sm p-2 transition-colors">Eliminar</button></td></tr>`).join('')||'<tr><td colspan="4" class="p-8 text-center text-gray-400 italic font-medium">Sin clases libres por ahora 🧘‍♀️</td></tr>'; }
 
-        window.openCalendar = (name, logsStr) => {
-            document.getElementById('calendarTitle').innerHTML = `Asistencia de <span class="text-orange-600">${name}</span>`;
-            selectedClientLogs = logsStr ? logsStr.split(',') : [];
-            currentCalDate = new Date();
-            renderCalendar();
-            els.calendarModal.classList.remove('hidden');
-        };
+        window.openCalendar = (name, logsStr) => { document.getElementById('calendarTitle').innerHTML = `Asistencia de <span class="text-orange-600">${name}</span>`; selectedClientLogs = logsStr ? logsStr.split(',') : []; currentCalDate = new Date(); renderCalendar(); els.calendarModal.classList.remove('hidden'); };
         window.changeMonth = d => { currentCalDate.setMonth(currentCalDate.getMonth() + d); renderCalendar(); };
         function renderCalendar() {
             const y=currentCalDate.getFullYear(), m=currentCalDate.getMonth(), firstDay=new Date(y,m,1).getDay(), daysInMonth=new Date(y,m+1,0).getDate(), today=new Date().toISOString().split('T')[0];
             document.getElementById('currentMonthYear').textContent = new Date(y,m).toLocaleDateString('es-ES',{month:'long',year:'numeric'});
-            let html = '';
-            for(let i=0; i<firstDay; i++) html+='<div></div>';
-            for(let d=1; d<=daysInMonth; d++) {
-                const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-                html += `<div class="calendar-day ${selectedClientLogs.includes(dateStr)?'attended':''} ${dateStr===today?'today':''}">${d}</div>`;
-            }
+            let html = ''; for(let i=0; i<firstDay; i++) html+='<div></div>';
+            for(let d=1; d<=daysInMonth; d++) { const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; html += `<div class="calendar-day ${selectedClientLogs.includes(dateStr)?'attended':''} ${dateStr===today?'today':''}">${d}</div>`; }
             document.getElementById('calendarGrid').innerHTML = html;
         }
 
@@ -425,7 +267,7 @@
         hF('bodegaForm','bodega_v2',fd=>Object.fromEntries(fd)); hF('expensesForm','expenses_v2',fd=>Object.fromEntries(fd)); hF('freeForm','free_classes_v2',fd=>Object.fromEntries(fd));
 
         const setLoading=b=>{document.getElementById('btnSpinner').classList.toggle('hidden',!b);document.getElementById('markBtn').disabled=b}, feedback=(m,t)=>{const el=document.getElementById('feedbackMsg');el.textContent=m;el.className=`mt-8 p-5 rounded-2xl text-center font-bold text-lg fade-in border-2 ${t==='error'?'bg-red-50 text-red-600 border-red-100':'bg-green-50 text-green-600 border-green-100'}`;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),5000)}, fmtDate=s=>s?`${s.split('-')[2]}/${s.split('-')[1]}/${s.split('-')[0].slice(2)}`:'-', sTD=()=>document.querySelectorAll('input[type="date"]').forEach(i=>{if(!i.value)i.value=new Date().toISOString().split('T')[0]});
-        window.del=async(c,id)=>{if(isAdmin&&confirm("¿Seguro que quieres borrar esto? 🤔"))await deleteDoc(doc(db,`artifacts/${appId}/public/data/${c}`,id))};
+        window.del=async(c,id)=>{if(isAdmin&&confirm("¿Seguro que quieres borrar esto? 🤔"))await deleteDoc(doc(db,`artifacts/${finalAppId}/public/data/${c}`,id))};
         document.addEventListener('DOMContentLoaded',sTD);
 
         els.loadInitBtn.onclick = async () => { if(!confirm("¿Cargar datos de prueba? Ojo: podría sobrescribir si usas los mismos DNI."))return; els.loadInitBtn.textContent="Cargando..."; els.loadInitBtn.disabled=true; try { const b=writeBatch(db), c=cols.clients();
